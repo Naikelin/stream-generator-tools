@@ -90,6 +90,13 @@ func main() {
 					},
 				},
 			},
+			{Name: "randomSentence",
+				Usage: "Generate a random sentence",
+				Action: func(c *cli.Context) error {
+					stream.ExcecuteProducers2()
+					return nil
+				},
+			},
 		},
 	}
 

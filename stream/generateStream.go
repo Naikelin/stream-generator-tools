@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"generate-stream-tools/models"
+	"math/rand"
 	"time"
 )
 
@@ -49,4 +50,14 @@ func ExecuteProducers(timeDelay int64, speedMult int64) {
 	}
 }
 
-//1043.483333
+func ExcecuteProducers2() {
+
+	for {
+		sentence := GenerateSentence()
+		awaitTime := rand.Float32() * 10
+		//fmt.Println(awaitTime, sentence)
+		time.Sleep(time.Duration(awaitTime) * time.Second)
+		go ProduceSentence("words", 0, sentence)
+	}
+
+}

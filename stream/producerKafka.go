@@ -46,3 +46,24 @@ func produceEvent(topic string, partition int32, event models.Event) {
 
 	log.Printf("> message sent to partition %d at offset %d\n", partition, offset)
 }
+
+func ProduceSentence(topic string, partition int32, word string) {
+	producer, err := createProducer()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer producer.Close()
+
+	msg := &sarama.ProducerMessage{
+		Topic:     topic,
+		Partition: partition,
+		Value:     sarama.StringEncoder(word),
+	}
+
+	partition, offset, err := producer.SendMessage(msg)
+	if err != nil {
+		log.Printf("Failed to store your data: %v", err)
+	}
+
+	log.Printf("> message sent to partition %d at offset %d\n", partition, offset)
+}
