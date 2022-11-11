@@ -2,8 +2,10 @@ package stream
 
 import (
 	"encoding/json"
+	"fmt"
 	"generate-stream-tools/models"
 	"log"
+	"os"
 
 	"github.com/Shopify/sarama"
 )
@@ -14,7 +16,13 @@ func createProducer() (sarama.SyncProducer, error) {
 	config.Producer.RequiredAcks = sarama.WaitForAll
 	config.Producer.Retry.Max = 5
 
-	producer, err := sarama.NewSyncProducer([]string{"localhost:9092"}, config)
+	KafkaServer := os.Getenv("KAFKA_SERVER")
+	KafkaPort := os.Getenv("KAFKA_PORT")
+	KafkaURL := KafkaServer + ":" + KafkaPort
+
+	fmt.Println("Kafka: ", KafkaURL)
+
+	producer, err := sarama.NewSyncProducer([]string{KafkaURL}, config)
 	if err != nil {
 		return nil, err
 	}

@@ -91,7 +91,7 @@ func main() {
 				},
 			},
 			{Name: "randomSentence",
-				Usage: "Generate a random sentence",
+				Usage: "Generate a random sentence, in random intervals of time between 1 and 10 seconds",
 				Action: func(c *cli.Context) error {
 					stream.ExcecuteProducers2()
 					return nil

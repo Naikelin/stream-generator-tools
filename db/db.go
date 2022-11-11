@@ -2,12 +2,13 @@ package db
 
 import (
 	"context"
+	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const URI = "mongodb://waze:miata123@localhost:27017/?maxPoolSize=20&w=majority"
+var URI = os.Getenv("MONGO_URI")
 
 func MongoConnect() (*mongo.Client, error) {
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(URI))

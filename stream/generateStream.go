@@ -55,7 +55,6 @@ func ExcecuteProducers2() {
 	for {
 		sentence := GenerateSentence()
 		awaitTime := rand.Float32() * 10
-		//fmt.Println(awaitTime, sentence)
 		time.Sleep(time.Duration(awaitTime) * time.Second)
 		go ProduceSentence("words", 0, sentence)
 	}
